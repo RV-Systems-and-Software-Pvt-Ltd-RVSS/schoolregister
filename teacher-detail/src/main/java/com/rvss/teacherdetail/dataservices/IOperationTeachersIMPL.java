@@ -47,7 +47,14 @@ public class IOperationTeachersIMPL implements IOperationTeachers{
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exp.getCause());
         }
     }
-
+    @Override
+    public ResponseEntity getTeacherById( String teacherId,TeacherJPARepository teacherJPARepository){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(teacherJPARepository.findByTeacherId(teacherId));
+        }catch(Exception exp){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exp.getCause());
+        }
+    }
     @Override
     public ResponseEntity getAllClassTeachersBySchool(String school_id, TeacherJPARepository teacherJPARepository) {
         try{

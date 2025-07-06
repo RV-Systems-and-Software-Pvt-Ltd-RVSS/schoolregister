@@ -80,6 +80,15 @@ public class DataInfoController {
             return ResponseEntity.status(HttpStatus.OK).body("There is No Teachers Registered for the mentioned School");
         }
     }
+    @GetMapping("/getTeacherById")
+    public ResponseEntity getTeacherById(@RequestParam("teacherEmpId") String schoolId){
+        ResponseEntity re = iOperationTeachers.getTeacherById(schoolId,teacherJPARepository);
+        if (re.hasBody())
+            return re;
+        else{
+            return ResponseEntity.status(HttpStatus.OK).body("There is No Teacher with this ID");
+        }
+    }
     @GetMapping("/getAsstClassTeachersOfSchool")
     public ResponseEntity getAsstClassTeachersOfSchool(@RequestParam("schoolId") String schoolId){
         ResponseEntity re = iOperationTeachers.getAllAsstClassTeachersBySchool(schoolId,teacherJPARepository);

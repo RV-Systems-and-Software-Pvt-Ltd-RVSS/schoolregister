@@ -15,9 +15,14 @@ import java.util.Optional;
 public interface TeacherJPARepository extends JpaRepository<Teacher, Long> {
     @Query("SELECT e FROM Teacher e WHERE e.slNo = :slNo")
     Optional<Teacher> findBySlNo(@Param("slNo") int slNo);
+
+
     List<Teacher> findByClassTeacher(boolean classTeacher);
     @Query("SELECT s FROM Teacher s WHERE s.schoolId = ?1")
     List<Teacher> findByschoolId(String  schoolId);
+
+    @Query("SELECT s FROM Teacher s WHERE s.teacherEmpId = ?1")
+    List<Teacher> findByTeacherId(String  teacherEmpId);
 
     @Query("SELECT s FROM Teacher s WHERE s.schoolId = ?1 and s.classTeacher =?2")
     List<Teacher> findAllClassTeachersBySchool(String  schoolId,boolean classTeacher);
