@@ -81,8 +81,17 @@ public class DataInfoController {
         }
     }
     @GetMapping("/getTeacherById")
-    public ResponseEntity getTeacherById(@RequestParam("teacherEmpId") String schoolId){
-        ResponseEntity re = iOperationTeachers.getTeacherById(schoolId,teacherJPARepository);
+    public ResponseEntity getTeacherById(@RequestParam("teacherEmpId") String teacherId){
+        ResponseEntity re = iOperationTeachers.getTeacherById(teacherId,teacherJPARepository);
+        if (re.hasBody())
+            return re;
+        else{
+            return ResponseEntity.status(HttpStatus.OK).body("There is No Teacher with this ID");
+        }
+    }
+    @GetMapping("/getTeacherByEmail")
+    public ResponseEntity getTeacherByEmail(@RequestParam("teacherEmailAddress") String email){
+        ResponseEntity re = iOperationTeachers.getTeacherByEmail(email,teacherJPARepository);
         if (re.hasBody())
             return re;
         else{

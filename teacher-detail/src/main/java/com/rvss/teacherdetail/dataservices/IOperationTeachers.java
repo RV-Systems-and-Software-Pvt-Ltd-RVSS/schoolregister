@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public interface IOperationTeachers {
  public ResponseEntity insertNewTeacher(Teacher teacher, TeacherJPARepository teacherJPARepository);
  public ResponseEntity getTeacherById( String teacherId,TeacherJPARepository teacherJPARepository);
+ public ResponseEntity getTeacherByEmail( String email,TeacherJPARepository teacherJPARepository);
  public ResponseEntity<Teacher> getAllTeachers(TeacherJPARepository teacherJPARepository);
  public ResponseEntity<Teacher> getAllTeachersOfSchool(String school_id,
                                                        TeacherJPARepository teacherJPARepository);
