@@ -1,6 +1,8 @@
 package com.rvss.classdetail.controller;
 
 import com.rvss.classdetail.beans.SchoolClass;
+import com.rvss.classdetail.beans.SchoolSubjectClass;
+import com.rvss.classdetail.beans.SubjectTeacher;
 import com.rvss.classdetail.dataservices.SchoolClassJPARepository;
 import com.rvss.classdetail.dataservices.IOperationsSchoolClass;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping(path = "info/schoolclass/api/v1",
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE,
-        method = {RequestMethod.GET, RequestMethod.POST})
-@RestController
-@EnableJpaRepositories
+
+
 public class DataInfoController {
     @Autowired
     IOperationsSchoolClass iOperationsSchoolClass;
@@ -32,6 +31,18 @@ public class DataInfoController {
     public ResponseEntity insertNewClass(@Valid @RequestBody SchoolClass schoolClass) {
         ResponseEntity re = iOperationsSchoolClass.insertNewSchoolClass(schoolClass,schoolClassJPARepository);
         return re;
+    }
+    @PostMapping("/insertNewClassWithSubject")
+    public ResponseEntity insertNewClassWithSubject (@Valid @RequestBody SchoolSubjectClass schoolSubjectClass){
+
+
+        ResponseEntity re = iOperationsSchoolClass.insertNewClassWithSubject (schoolSubjectClass, schoolClassJPARepository);
+        return re;
+    }
+    @GetMapping("/getClassWithSubjectTeacher")
+    public ResponseEntity<SchoolSubjectClass> getClassWithSubjectTeacher(@RequestParam String schoolId,
+                                                     @RequestParam String classId){
+      return null;
     }
     @GetMapping("/getAllClassBySchool")
     public ResponseEntity getAllClassBySchool(@RequestParam("schoolId") String schoolId){

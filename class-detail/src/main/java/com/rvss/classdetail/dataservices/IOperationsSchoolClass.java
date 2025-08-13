@@ -1,13 +1,18 @@
 package com.rvss.classdetail.dataservices;
 import com.rvss.classdetail.beans.SchoolClass;
+import com.rvss.classdetail.beans.SchoolSubjectClass;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
+
+import java.util.Optional;
 
 @Service
 public interface IOperationsSchoolClass {
     public ResponseEntity insertNewSchoolClass(SchoolClass schoolClass,
                                             SchoolClassJPARepository schoolClassJPARepository) ;
+    public ResponseEntity insertNewClassWithSubject(SchoolSubjectClass schoolSubjectClass , SchoolClassJPARepository schoolClassJPARepository);
+    public Optional<ResponseEntity> getClassWithSubjectTeacher(String schoolId, String classId);
     public ResponseEntity updateNewSchoolClass(SchoolClass schoolClass,
                                                SchoolClassJPARepository schoolClassJPARepository) ;
 
